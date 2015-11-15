@@ -7,12 +7,10 @@ from os import system
 CONVERSING = True
 
 dictionary = {"hello!":[]}
-#weather_com_result = pywapi.get_weather_from_weather_com('10001')
-#print "Weather.com says: It is " + string.lower(weather_com_result['current_conditions']['text']) + " and " + weather_com_result['current_conditions']['temperature'] + "C now in New York.\n\n"
 
 print "hello! my name is Ultron! let me do things for you."
 print "below are all of my available commands, type the keyword 'key' followed by the desired command if you want me to do something, else we can just talk!"
-commands = ["weather"]
+commands = ["weather", "calculator"]
 for command in commands:
         print ">>> " + command
 
@@ -34,6 +32,11 @@ while CONVERSING:
                         print "\n"
                         print "Weather.com says: It is " + string.lower(weatherResult['current_conditions']['text']) + " and " + weatherResult['current_conditions']['temperature'] + "C now in " + zipcode + "."
                         print "Yahoo says: It is " + string.lower(yahooResult['condition']['text']) + " and " + yahooResult['condition']['temp'] + "C now in " + zipcode + ".\n"
+                elif (command == "calculator"):
+                        expression = parts[2]
+                        #print "\n"
+                        print eval(expression)
+                        #print "\n"
                 continue
         dictionary[bot].append(userInput.lower())
         if (not dictionary.has_key(userInput)):
