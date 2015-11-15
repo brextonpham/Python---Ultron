@@ -3,6 +3,7 @@ import pafy
 import pywapi
 import string
 import shlex
+import requests
 import wikipedia
 from PyLyrics import *
 from os import system
@@ -48,8 +49,7 @@ while CONVERSING:
                 elif (command == "wikipedia"):
                         splitForWikipedia = shlex.split(userInput)
                         search = splitForWikipedia[2]
-                        wikipedia.search(search)
-                        wikipedia.summary(search)
+                        print wikipedia.summary(search)
                 continue
         elif (checkForKeyword == "" or checkForKeyword == " "):
                 CONVERSING = False
