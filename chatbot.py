@@ -3,6 +3,7 @@ import pafy
 import pywapi
 import string
 import shlex
+import wikipedia
 from PyLyrics import *
 from os import system
 
@@ -12,7 +13,7 @@ dictionary = {"hello!":[]}
 
 print "hello! my name is Ultron! let me do things for you."
 print "below are all of my available commands, type the keyword 'key' followed by the desired command if you want me to do something, else we can just talk!"
-commands = ["weather", "calculator", "lyrics"]
+commands = ["weather", "calculator", "lyrics", "wikipedia"]
 for command in commands:
         print ">>> " + command
 
@@ -44,6 +45,11 @@ while CONVERSING:
                         author = splitForLyrics[2]
                         song = splitForLyrics[3]
                         print(PyLyrics.getLyrics(author, song))
+                elif (command == "wikipedia"):
+                        splitForWikipedia = shlex.split(userInput)
+                        search = splitForWikipedia[2]
+                        wikipedia.search(search)
+                        wikipedia.summary(search)
                 continue
         elif (checkForKeyword == "" or checkForKeyword == " "):
                 CONVERSING = False
