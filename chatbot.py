@@ -2,6 +2,8 @@ import random
 import pafy
 import pywapi
 import string
+import shlex
+from PyLyrics import *
 from os import system
 
 CONVERSING = True
@@ -10,7 +12,7 @@ dictionary = {"hello!":[]}
 
 print "hello! my name is Ultron! let me do things for you."
 print "below are all of my available commands, type the keyword 'key' followed by the desired command if you want me to do something, else we can just talk!"
-commands = ["weather", "calculator"]
+commands = ["weather", "calculator", "lyrics"]
 for command in commands:
         print ">>> " + command
 
@@ -37,7 +39,14 @@ while CONVERSING:
                         #print "\n"
                         print eval(expression)
                         #print "\n"
+                elif (command == "lyrics"):
+                        splitForLyrics = shlex.split(userInput)
+                        author = splitForLyrics[2]
+                        song = splitForLyrics[3]
+                        print(PyLyrics.getLyrics(author, song))
                 continue
+        elif (checkForKeyword == "" or checkForKeyword == " "):
+                CONVERSING = False
         dictionary[bot].append(userInput.lower())
         if (not dictionary.has_key(userInput)):
                 dictionary.update({userInput:[]})
@@ -45,6 +54,7 @@ while CONVERSING:
         else:
                 listChoice = dictionary[userInput]
                 bot = random.choice(listChoice)
+
 
 
 
