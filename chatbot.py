@@ -5,6 +5,7 @@ import string
 import shlex
 import requests
 import wikipedia
+import goslate
 from PyLyrics import *
 from os import system
 
@@ -14,7 +15,7 @@ dictionary = {"hello!":[]}
 
 print "hello! my name is Ultron! let me do things for you."
 print "below are all of my available commands, type the keyword 'key' followed by the desired command if you want me to do something, else we can just talk!"
-commands = ["weather", "calculator", "lyrics", "wikipedia"]
+commands = ["weather", "calculator", "lyrics", "wikipedia", "translate"]
 for command in commands:
         print ">>> " + command
 
@@ -50,6 +51,13 @@ while CONVERSING:
                         splitForWikipedia = shlex.split(userInput)
                         search = splitForWikipedia[2]
                         print wikipedia.summary(search)
+                elif (command == "translate"):
+                        gs = goslate.Goslate()
+                        splitForTranslate = shlex.split(userInput)
+                        phrase = splitForTranslate[2]
+                        destination = splitForTranslate[3]
+                        print gs.translate(phrase, destination)
+                
                 continue
         elif (checkForKeyword == "" or checkForKeyword == " "):
                 CONVERSING = False
