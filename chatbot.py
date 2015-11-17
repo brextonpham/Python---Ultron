@@ -146,7 +146,7 @@ while CONVERSING:
                             i=0
                             for element in movieList:
                                 i+=1
-                                #print "{}: {}".format(i,element.summary().encode('utf-8'))
+                                #print element.summary().encode('utf-8')
                             while True:
                                 choice = int(raw_input("Please select an entry to see more info: "))
                                 if 0 <= choice and len(movieList) >= choice:
