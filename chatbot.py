@@ -68,11 +68,11 @@ def schedule():
 
 CONVERSING = True
 
-dictionary = {"hello!":[]}
+dictionary = {"hello!":["hi"]}
 
 print("hello! my name is Ultron! let me do things for you.")
 print("below are all of my available commands, type the keyword 'key' followed by the desired command if you want me to do something, else we can just talk!")
-commands = ["weather", "calculator", "lyrics", "wikipedia", "translate"]
+commands = ["weather", "calculator", "lyrics", "wikipedia", "translate", "spotify"]
 for command in commands:
         print(">>> " + command)
 
@@ -116,6 +116,25 @@ while CONVERSING:
                         print(gs.translate(phrase, destination))
                 elif (command == "schedule"):
                         schedule()
+                elif (command == "spotify"):
+                    while CONVERSING:
+                        bot = "Yo DJ whatchu want??"
+                        print("B: " + bot)
+                        system('say %s' % (bot))
+                        userInput = raw_input("H: ")
+                        parts = userInput.split(' ')
+                        DJ = parts[0]
+                        song = ''
+                        name = ''
+                        if (DJ == 'quit'):
+                            break;
+                        if (DJ == 'play'):
+                            if (len(parts) > 1):
+                                for part in parts[1:]:
+                                    name += part + ' '
+                                song = ' [' + name +']'
+                        system('spotify ' + DJ + song)
+                    bot = "dope! Exiting Spotify shell."
                 continue
         elif (checkForKeyword == "" or checkForKeyword == " "):
                 CONVERSING = False
