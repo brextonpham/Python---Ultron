@@ -14,6 +14,7 @@ import requests
 import wikipedia
 import goslate
 import datetime
+import imdb
 from PyLyrics import *
 from os import system
 
@@ -72,7 +73,7 @@ dictionary = {"hello!":["hi"]}
 
 print("hello! my name is Ultron! let me do things for you.")
 print("below are all of my available commands, type the keyword 'key' followed by the desired command if you want me to do something, else we can just talk!")
-commands = ["weather", "calculator", "lyrics", "wikipedia", "translate", "spotify"]
+commands = ["weather", "calculator", "lyrics", "wikipedia", "translate", "spotify", "imdb"]
 for command in commands:
         print(">>> " + command)
 
@@ -135,6 +136,65 @@ while CONVERSING:
                                 song = ' [' + name +']'
                         system('spotify ' + DJ + song)
                     bot = "dope! Exiting Spotify shell."
+                elif (command == "imdb"):
+                    imdbAccess = imdb.IMDb()
+                    while(True):
+                        choice = raw_input("Would you like to search for a M)ovie, E)pisode, P)erson, or C)haracter?").lower()
+                        if (choice == 'm'):
+                            movieToSearch = raw_input("What movie would you like to search on IMDb? ")
+                            movieList = imdbAccess.search_movie(movieToSearch)
+                            i=0
+                            for element in movieList:
+                                i+=1
+                                #print "{}: {}".format(i,element.summary().encode('utf-8'))
+                            while True:
+                                choice = int(raw_input("Please select an entry to see more info: "))
+                                if 0 <= choice and len(movieList) >= choice:
+                                    break
+                            print(imdbAccess.get_movie(movieList[choice-1].movieID).summary())
+
+                        elif (choice == 'e'):
+                            episodeToSearch = raw_input("What episode would you like to search on IMDb? ")
+                            episodeList = imdbAccess.search_episode(episodeToSearch)
+                            i=0
+                            for element in episodeList:
+                                i+=1
+                                #print "{}: {}".format(i,element.summary().encode('utf-8'))
+                            while True:
+                                choice = int(raw_input("Please select an entry to see more info: "))
+                                if 0 <= choice and len(episodeList) >= choice:
+                                    break
+                            print(imdbAccess.get_episode(episodeList[choice-1].movieID).summary())
+
+                        elif choice == 'p':
+                            personToSearch = raw_input("What person would you like to search on IMDb? ")
+                            personList = imdbAccess.search_person(personToSearch)
+                            i=0
+                            for element in personList:
+                                i+=1
+                                #print "{}: {}".format(i,element.summary().encode('utf-8'))
+                            while True:
+                                choice = int(raw_input("Please select an entry to see more info: "))
+                                if 0 <= choice and len(personList) >= choice:
+                                    break
+                            print(imdbAccess.get_person(personList[choice-1].personID).summary())
+
+                        elif choice == 'c':
+                            characterToSearch = raw_input("What character would you like to search on IMDb? ")
+                            characterList = imdbAccess.search_character(characterToSearch)
+                            i=0
+                            for element in characterList:
+                                i+=1
+                                #print "{}: {}".format(i,element.summary().encode('utf-8'))
+                            while True:
+                                choice = int(raw_input("Please select an entry to see more info: "))
+                                if 0 <= choice and len(characterList) >= choice:
+                                    break
+                            print(imdbAccess.get_character(characterList[choice-1].characterID).summary())
+
+                        searchAgain = raw_input("Would you like to search again (Y or N)? ").lower()
+                        if searchAgain == 'n':
+                            break
                 continue
         elif (checkForKeyword == "" or checkForKeyword == " "):
                 CONVERSING = False
