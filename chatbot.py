@@ -89,6 +89,7 @@ while CONVERSING:
         if (checkForKeyword == 'key'):
                 command = parts[1]
                 if (command == "weather"):
+                        print("hi")
                         zipcode = parts[2]
                         weatherResult = pywapi.get_weather_from_weather_com(zipcode)
                         yahooResult = pywapi.get_weather_from_yahoo(zipcode)
